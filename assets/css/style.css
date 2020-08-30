@@ -21,6 +21,19 @@ main{
   margin: 0 auto;
 }
 
+/* hide sections by default */
+main section{
+  display: none;
+}
+
+/* show sections based on the class applied to <main> */
+.start #start-page,
+.quiz #quiz-page,
+.scores #high-score-page{
+  display: block;
+}
+
+/* start page styles */
 #start-page{
   text-align: center;
 }
@@ -28,6 +41,7 @@ main{
   margin-bottom: 1em;
 }
 
+/* button styles */
 button{
   background-color: #351c75;
   color: #fff;
