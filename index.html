@@ -5,10 +5,25 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="./assets/css/style.css" />
-    <title>Code Quiz</title>
+    <title>Coding Quiz Challenge</title>
   </head>
 
   <body>
+    <header>
+      <div class="high-score-link"><a href="#">View high scores</a></div>
+      <div class="time-container">Time: <span id="timer">0</span></div>
+    </header>
+
+    <main class="start">
+      <section id="start-page">
+        <h1>Coding Quiz Challenge</h1>
+        <p>Try to answer the following code-related questions within the time limit. Keep in mind that incorrect answers
+          will penalize your score/time by ten seconds!</p>
+        <button id="startBtn">Start Quiz</button>
+      </section>
+      <section id="quiz-page"></section>
+      <section id="high-score-page"></section>
+    </main>
 
     <script src="./assets/js/script.js"></script>
   </body>
