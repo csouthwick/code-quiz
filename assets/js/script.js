@@ -109,6 +109,20 @@ var endQuiz = function () {
 };
 
 
+var loadSavedScores = function () {
+  // get high scores from localStorage, if any
+  var highScores = localStorage.getItem("highScores");
+  if (!highScores) {
+    // if there are no high scores in localStorage, reset to an empty string
+    highScores = [];
+  } else {
+    // else parse the JSON
+    highScores = JSON.parse(highScores);
+  }
+  return highScores;
+};
+
+
 var showHighScores = function () {
   // if the timer is running, clear it
   if (!timer) {
@@ -122,12 +136,8 @@ var showHighScores = function () {
   // clear any previous contents
   highScoreListEl.innerHTML = "";
 
-  // get high scores from localStorage, if any
-  var highScores = localStorage.getItem("highScores");
-  if (!highScores) {
-    // if there are no high scores in localStorage, reset to an empty string
-    highScores = [];
-  }
+  // get any existing high scores
+  var highScores = loadSavedScores();
 
   // create the high scores list
   for (var i = 0; i < highScores.length; i++) {
@@ -153,10 +163,10 @@ var clearScores = function () {
   var highScoreListEl = document.querySelector(".high-scores");
   // clear any previous contents
   highScoreListEl.innerHTML = "";
-}
+};
+
 
 // event handlers
-
 document.getElementById("startBtn").addEventListener("click", startTimer);
 document.querySelector("#quiz-page .choices").addEventListener("click", checkAnswer);
 document.querySelector(".high-score-link a").addEventListener("click", showHighScores);
