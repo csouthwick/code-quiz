@@ -21,11 +21,13 @@ var quizData = [{
 }];
 
 var remainingTime = 0;
+var currentQuestion = 0;
 
 
 // functions
 
 var startTimer = function () {
+  displayQuestion(0);
   document.querySelector("main").className = "quiz";
   remainingTime = 75;
   document.getElementById("timer").innerHTML = remainingTime;
@@ -39,6 +41,27 @@ var startTimer = function () {
       clearInterval(timer);
     }
   }, 1000);
+};
+
+
+var displayQuestion = function (questionIndex) {
+  var question = quizData[questionIndex];
+  var quizSectionEl = document.getElementById("quiz-page");
+
+  // display the next question
+  var questionEl = quizSectionEl.querySelector(".question");
+  questionEl.textContent = question.q;
+  questionEl.setAttribute("data-question-index", questionIndex.toString());
+
+  // clear previous answers
+  var choicesEl = quizSectionEl.querySelector(".choices");
+  choicesEl.innerHTML = "";
+
+  for (var i = 0; i < question.choices.length; i++) {
+    var answerBtn = document.createElement("button");
+    answerBtn.textContent = (i + 1) + ". " + question.choices[i];
+    choicesEl.appendChild(answerBtn);
+  }
 };
 
 
