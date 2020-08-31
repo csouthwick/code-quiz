@@ -1,23 +1,23 @@
 var quizData = [{
   q: "Commonly used data types DO NOT include:",
   a: 2,
-  choices: ["strings", "booleans", "alerts", "numbers"]
+  choices: ["1. strings", "2. booleans", "3. alerts", "4. numbers"]
 }, {
   q: "The condition in an if / else statement is enclosed with _______.",
   a: 2,
-  choices: ["quotes", "curly brackets", "parenthesis", "square brackets"]
+  choices: ["1. quotes", "2. curly brackets", "3. parenthesis", "4. square brackets"]
 }, {
   q: "Arrays in JavaScript can be used to store _______.",
   a: 3,
-  choices: ["numbers and strings", "other arrays", "booleans", "all of the above"]
+  choices: ["1. numbers and strings", "2. other arrays", "3. booleans", "4. all of the above"]
 }, {
   q: "String values must be enclosed within _______ when being assigned to variables.",
   a: 2,
-  choices: ["commas", "curly brackets", "quotes", "parenthesis"]
+  choices: ["1. commas", "2. curly brackets", "3. quotes", "4. parenthesis"]
 }, {
   q: "A very useful tool used during development and debugging for printing content to the debugger is:",
   a: 3,
-  choices: ["JavaScript", "terminal / bash", "for loops", "console.log"]
+  choices: ["1. JavaScript", "2. terminal / bash", "3. for loops", "4. console.log"]
 }];
 
 var remainingTime = 0;
@@ -27,11 +27,17 @@ var currentQuestion = 0;
 // functions
 
 var startTimer = function () {
-  displayQuestion(0);
-  document.querySelector("main").className = "quiz";
+  // reset quiz variables
+  currentQuestion = 0;
+  displayQuestion(currentQuestion);
+
   remainingTime = 75;
   document.getElementById("timer").innerHTML = remainingTime;
 
+  // show quiz page
+  document.querySelector("main").className = "quiz";
+
+  // start the timer
   var timer = setInterval(function () {
     if (remainingTime > 0) {
       remainingTime--;
@@ -53,14 +59,39 @@ var displayQuestion = function (questionIndex) {
   questionEl.textContent = question.q;
   questionEl.setAttribute("data-question-index", questionIndex.toString());
 
-  // clear previous answers
+  // clear previous answer choices
   var choicesEl = quizSectionEl.querySelector(".choices");
   choicesEl.innerHTML = "";
 
+  // display answer choices
   for (var i = 0; i < question.choices.length; i++) {
     var answerBtn = document.createElement("button");
-    answerBtn.textContent = (i + 1) + ". " + question.choices[i];
+    answerBtn.textContent = question.choices[i];
     choicesEl.appendChild(answerBtn);
+  }
+};
+
+
+var checkAnswer = function (event) {
+  if (event.target.tagName !== "BUTTON") {
+    return;
+  }
+
+  var correctAnswerIndex = quizData[currentQuestion].a;
+  var correctAnswerStr = quizData[currentQuestion].choices[correctAnswerIndex];
+
+  var resultEl = document.querySelector(".last-result");
+
+  if (event.target.innerHTML === correctAnswerStr) {
+    resultEl.textContent = "Correct!"
+  } else {
+    remainingTime -= 10;
+    resultEl.textContent = "Wrong!"
+  }
+
+  currentQuestion++;
+  if (currentQuestion < quizData.length) {
+    displayQuestion(currentQuestion);
   }
 };
 
@@ -68,3 +99,4 @@ var displayQuestion = function (questionIndex) {
 // event handlers
 
 document.getElementById("startBtn").addEventListener("click", startTimer);
+document.querySelector("#quiz-page .choices").addEventListener("click", checkAnswer);
