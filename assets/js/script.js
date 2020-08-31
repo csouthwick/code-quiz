@@ -46,6 +46,7 @@ var startTimer = function () {
     } else {
       document.getElementById("timer").innerHTML = 0;
       clearInterval(timer);
+      endQuiz();
     }
   }, 1000);
 };
