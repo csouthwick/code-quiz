@@ -88,6 +88,7 @@ var checkAnswer = function (event) {
     resultEl.textContent = "Correct!"
   } else {
     remainingTime -= 10;
+    document.getElementById("timer").innerHTML = remainingTime;
     resultEl.textContent = "Wrong!"
   }
 
