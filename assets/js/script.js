@@ -22,6 +22,7 @@ var quizData = [{
 
 var remainingTime = 0;
 var currentQuestion = 0;
+var timer;
 
 
 // functions
@@ -38,7 +39,7 @@ var startTimer = function () {
   document.querySelector("main").className = "quiz";
 
   // start the timer
-  var timer = setInterval(function () {
+  timer = setInterval(function () {
     if (remainingTime > 0) {
       remainingTime--;
       document.getElementById("timer").innerHTML = remainingTime;
@@ -73,7 +74,8 @@ var displayQuestion = function (questionIndex) {
 
 
 var checkAnswer = function (event) {
-  if (event.target.tagName !== "BUTTON") {
+  var clickedEl = event.target;
+  if (clickedEl.tagName !== "BUTTON") {
     return;
   }
 
@@ -82,7 +84,7 @@ var checkAnswer = function (event) {
 
   var resultEl = document.querySelector(".last-result");
 
-  if (event.target.innerHTML === correctAnswerStr) {
+  if (clickedEl.innerHTML === correctAnswerStr) {
     resultEl.textContent = "Correct!"
   } else {
     remainingTime -= 10;
@@ -92,7 +94,17 @@ var checkAnswer = function (event) {
   currentQuestion++;
   if (currentQuestion < quizData.length) {
     displayQuestion(currentQuestion);
+  } else {
+    endQuiz();
   }
+};
+
+var endQuiz = function () {
+  clearInterval(timer);
+  document.getElementById("score").innerHTML = remainingTime;
+  document.querySelector("main").className += " end";
+  var quizSectionEl = document.getElementById("quiz-page");
+  quizSectionEl.querySelector(".question").textContent = "All done!";
 };
 
 
