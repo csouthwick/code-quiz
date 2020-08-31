@@ -145,6 +145,9 @@ var saveScore = function () {
   // store in localStorage
   localStorage.setItem("highScores", JSON.stringify(highScores));
 
+  // clear the initials input field
+  document.getElementById("initials").value = "";
+
   // go to the high scores page
   showHighScores();
 };
