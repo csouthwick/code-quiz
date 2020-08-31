@@ -19,3 +19,29 @@ var quizData = [{
   a: 3,
   choices: ["JavaScript", "terminal / bash", "for loops", "console.log"]
 }];
+
+var remainingTime = 0;
+
+
+// functions
+
+var startTimer = function () {
+  document.querySelector("main").className = "quiz";
+  remainingTime = 75;
+  document.getElementById("timer").innerHTML = remainingTime;
+
+  var timer = setInterval(function () {
+    if (remainingTime > 0) {
+      remainingTime--;
+      document.getElementById("timer").innerHTML = remainingTime;
+    } else {
+      document.getElementById("timer").innerHTML = 0;
+      clearInterval(timer);
+    }
+  }, 1000);
+};
+
+
+// event handlers
+
+document.getElementById("startBtn").addEventListener("click", startTimer);
