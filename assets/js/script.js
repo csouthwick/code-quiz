@@ -123,6 +123,32 @@ var loadSavedScores = function () {
 };
 
 
+var saveScore = function () {
+  var highScores = loadSavedScores();
+
+  // get the user's initials and package it into an object with their remaining time
+  var initials = document.getElementById("initials").value;
+  var score = {
+    initials: initials,
+    score: remainingTime
+  };
+
+  // push it onto the array of high scores
+  highScores.push(score);
+
+  // sort the scores, largest first
+  highScores.sort(function (a, b) {
+    return b.score - a.score;
+  });
+
+  // store in localStorage
+  localStorage.setItem("highScores", JSON.stringify(highScores));
+
+  // go to the high scores page
+  showHighScores();
+};
+
+
 var showHighScores = function () {
   // if the timer is running, clear it
   if (!timer) {
@@ -142,7 +168,8 @@ var showHighScores = function () {
   // create the high scores list
   for (var i = 0; i < highScores.length; i++) {
     var scoreLiEl = document.createElement("li");
-    scoreLiEl.textContent = highScores[i].initial + " - " + highScores[i].score;
+    scoreLiEl.textContent = highScores[i].initials + " - " + highScores[i].score;
+    highScoreListEl.appendChild(scoreLiEl);
   }
 
   // show the score page
@@ -172,3 +199,4 @@ document.querySelector("#quiz-page .choices").addEventListener("click", checkAns
 document.querySelector(".high-score-link a").addEventListener("click", showHighScores);
 document.getElementById("back-to-start").addEventListener("click", showHome);
 document.getElementById("clear-scores").addEventListener("click", clearScores);
+document.getElementById("save-score").addEventListener("click", saveScore);
