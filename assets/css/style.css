@@ -21,6 +21,21 @@ main{
   margin: 0 auto;
 }
 
+/* button styles */
+button{
+  background-color: #351c75;
+  color: #fff;
+  font-size: .9em;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+}
+button:hover,
+button:active{
+  background-color: #bd60e7;
+}
+
+
 /* hide sections by default */
 main section{
   display: none;
@@ -33,6 +48,7 @@ main section{
   display: block;
 }
 
+
 /* start page styles */
 #start-page{
   text-align: center;
@@ -41,16 +57,19 @@ main section{
   margin-bottom: 1em;
 }
 
-/* button styles */
-button{
-  background-color: #351c75;
-  color: #fff;
-  font-size: .9em;
-  border: none;
-  padding: 12px 20px;
-  border-radius: 8px;
+
+/* quiz page styles */
+.question{
+  font-weight: bold;
+  font-size: 1.2em;
 }
-button:hover,
-button:active{
-  background-color: #bd60e7;
+.choices{
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-content: flex-start;
+}
+#quiz-page button{
+  text-align: left;
+  margin: 6px 0;
 }
