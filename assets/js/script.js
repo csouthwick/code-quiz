@@ -36,7 +36,7 @@ var startTimer = function () {
   document.getElementById("timer").innerHTML = remainingTime;
 
   // show quiz page
-  document.querySelector("main").className = "quiz";
+  document.body.className = "quiz";
 
   // start the timer
   timer = setInterval(function () {
@@ -103,13 +103,62 @@ var checkAnswer = function (event) {
 var endQuiz = function () {
   clearInterval(timer);
   document.getElementById("score").innerHTML = remainingTime;
-  document.querySelector("main").className += " end";
+  document.body.className += " end";
   var quizSectionEl = document.getElementById("quiz-page");
   quizSectionEl.querySelector(".question").textContent = "All done!";
 };
 
 
+var showHighScores = function () {
+  // if the timer is running, clear it
+  if (!timer) {
+    clearInterval(timer);
+    remainingTime = 0;
+    document.getElementById("timer").innerHTML = remainingTime;
+  }
+
+  // get the high scores ordered list element
+  var highScoreListEl = document.querySelector(".high-scores");
+  // clear any previous contents
+  highScoreListEl.innerHTML = "";
+
+  // get high scores from localStorage, if any
+  var highScores = localStorage.getItem("highScores");
+  if (!highScores) {
+    // if there are no high scores in localStorage, reset to an empty string
+    highScores = [];
+  }
+
+  // create the high scores list
+  for (var i = 0; i < highScores.length; i++) {
+    var scoreLiEl = document.createElement("li");
+    scoreLiEl.textContent = highScores[i].initial + " - " + highScores[i].score;
+  }
+
+  // show the score page
+  document.body.className = "scores";
+};
+
+
+var showHome = function () {
+  document.body.className = "start";
+};
+
+
+var clearScores = function () {
+  // clear high scores if the key exists, will do nothing if key does not exist
+  localStorage.removeItem("highScores");
+
+  // get the high scores ordered list element
+  var highScoreListEl = document.querySelector(".high-scores");
+  // clear any previous contents
+  highScoreListEl.innerHTML = "";
+}
+
 // event handlers
 
 document.getElementById("startBtn").addEventListener("click", startTimer);
 document.querySelector("#quiz-page .choices").addEventListener("click", checkAnswer);
+document.querySelector(".high-score-link a").addEventListener("click", showHighScores);
+document.getElementById("back-to-start").addEventListener("click", showHome);
+document.getElementById("clear-scores").addEventListener("click", clearScores);
