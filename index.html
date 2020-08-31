@@ -8,13 +8,13 @@
     <title>Coding Quiz Challenge</title>
   </head>
 
-  <body>
+  <body class="start">
     <header>
       <div class="high-score-link"><a href="#">View high scores</a></div>
       <div class="time-container">Time: <span id="timer">0</span></div>
     </header>
 
-    <main class="start">
+    <main>
       <section id="start-page">
         <h1>Coding Quiz Challenge</h1>
         <p>Try to answer the following code-related questions within the time limit. Keep in mind that incorrect answers
@@ -30,7 +30,11 @@
         </div>
         <div class="last-result"></div>
       </section>
-      <section id="high-score-page"></section>
+      <section id="high-score-page">
+        <h2>High scores</h2>
+        <ol class="high-scores"></ol>
+        <button id="back-to-start">Go back</button> <button id="clear-scores">Clear high scores</button>
+      </section>
     </main>
 
     <script src="./assets/js/script.js"></script>

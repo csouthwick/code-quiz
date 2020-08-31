@@ -37,11 +37,15 @@ button:active{
 }
 
 
-/* hide sections by default */
+/* hide some sections by default */
 main section,
 .final-score,
 .end .choices{
   display: none;
+}
+
+.scores header{
+  visibility: hidden;
 }
 
 /* show sections based on the class applied to <main> */
@@ -88,4 +92,11 @@ main section,
 .final-score input{
   font-size: 1em;
   padding: 4px 8px;
+}
+
+/* high scores page styles */
+ol{
+  background-color: #d9d3e9;
+  padding-left: 2em;
+  margin: 1em 0;
 }
