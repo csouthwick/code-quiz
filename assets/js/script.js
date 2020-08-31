@@ -151,10 +151,10 @@ var saveScore = function () {
 
 var showHighScores = function () {
   // if the timer is running, clear it
-  if (!timer) {
+  if (timer !== null) {
     clearInterval(timer);
     remainingTime = 0;
-    document.getElementById("timer").innerHTML = remainingTime;
+    document.getElementById("timer").innerHTML = 0;
   }
 
   // get the high scores ordered list element
